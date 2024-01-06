@@ -92,7 +92,7 @@ class TransactionDetailController extends ApiBaseController
                 'item_id' => 'required|numeric',
                 'amount' => 'required|numeric',
             ]);
-            $data = Sale::find($id);
+            $data = SaleDetail::find($id);
             $item = Item::find($request->item_id);
             $sale = Sale::find($request->sale_id);
             if ($data && $item && $sale) {

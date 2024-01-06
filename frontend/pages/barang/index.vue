@@ -30,6 +30,10 @@
                         <b-button v-on:click="perbaharui(item.id)" size="sm" style="margin-top: 0.2rem;">
                             <i class="tim-icons icon-pencil"></i>
                         </b-button>
+
+                        <b-button v-on:click="stock(item.id)" size="sm" style="margin-top: 0.2rem;">
+                            <i class="tim-icons icon-simple-add"></i>
+                        </b-button>
                     </template>
                 </b-table>
                 <b-modal id="modal-create-form" centered size="lg" title="Membuat data jenis barang" title-class="font-27"
@@ -48,6 +52,14 @@
                         </div>
                     </div>
                 </b-modal>
+                <b-modal id="modal-stock-form" centered size="lg" title="Menambah data stok barang" title-class="font-27"
+                    hide-footer no-close-on-backdrop>
+                    <div class="row">
+                        <div class="col-12">
+                            <stock-form ref="revisi" :items="form" @input="submitStock"></stock-form>
+                        </div>
+                    </div>
+                </b-modal>
             </card>
         </div>
     </div>
@@ -55,11 +67,14 @@
 
 <script>
 import ItemForm from '~/components/item/form'
+import stockForm from '~/components/stock/form'
+
 
 export default {
     // name: 'Jenis Barang',
     components: {
-        ItemForm
+        ItemForm,
+        stockForm
     },
     data() {
         return {
@@ -112,6 +127,8 @@ export default {
                 name: null,
                 price: null,
                 type_id: null,
+                item_id: null,
+                stock: null,
             }
         };
     },
@@ -155,6 +172,10 @@ export default {
             this.getItem(id)
             this.$bvModal.show('modal-update-form')
         },
+        stock(id) {
+            this.form.item_id = id
+            this.$bvModal.show('modal-stock-form')
+        },
         submitUpdate(ItemForm) {
             let form = ItemForm;
             this.$store
@@ -183,6 +204,21 @@ export default {
                     this.form.price = null;
                     this.form.type_id = null;
                     this.$bvModal.hide('modal-create-form')
+                })
+                .catch((error) => {
+                });
+        },
+        submitStock(stockForm) {
+            let form = stockForm;
+            this.$store
+                .dispatch("stock/store", { form })
+                .then((resp) => {
+                    console.log(resp);
+                    this.getListItem();
+                    this.form.id = null;
+                    this.form.stock = null;
+                    this.form.item_id = null;
+                    this.$bvModal.hide('modal-stock-form')
                 })
                 .catch((error) => {
                 });

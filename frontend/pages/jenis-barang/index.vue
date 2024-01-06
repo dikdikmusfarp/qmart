@@ -24,6 +24,9 @@
                         <b-button v-on:click="perbaharui(item.id)" size="sm" style="margin-top: 0.2rem;">
                             <i class="tim-icons icon-pencil"></i>
                         </b-button>
+                        <b-button v-on:click="deleteType(item.id)" size="sm" style="margin-top: 0.2rem;">
+                            <i class="tim-icons icon-trash-simple"></i>
+                        </b-button>
                     </template>
                 </b-table>
                 <b-modal id="modal-create-form" centered size="lg" title="Membuat data jenis barang" title-class="font-27"
@@ -170,6 +173,14 @@ export default {
                     this.getListJenis()
                 }
             }, 600)
+        },
+        deleteType(id) {
+            this.$store.dispatch("type/delete", { id: id })
+                .then((resp) => {
+                    this.getListJenis()
+                })
+                .catch((error) => {
+                });
         },
     },
     async created() {

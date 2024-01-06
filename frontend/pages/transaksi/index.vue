@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <input id="rounded" autocomplete="off" @input="debounceSearch" v-model="table.search" type="search"
-                            class="form-control" name="name" placeholder="Cari jenis barang" />
+                            class="form-control" name="name" placeholder="Cari waktu transaksi" />
                     </div>
                 </div>
                 <b-table responsive="sm" class="myTablePTK" :fields="table.fields" :items="table.items"
@@ -26,7 +26,7 @@
                         </b-button>
                     </template>
                 </b-table>
-                <b-modal id="modal-create-form" centered size="lg" title="Membuat data jenis barang" title-class="font-27"
+                <b-modal id="modal-create-form" centered size="lg" title="Membuat data transaksi" title-class="font-27"
                     hide-footer no-close-on-backdrop>
                     <div class="row">
                         <div class="col-12">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 </b-modal>
-                <b-modal id="modal-update-form" centered size="lg" title="Mengubah data jenis barang" title-class="font-27"
+                <b-modal id="modal-update-form" centered size="lg" title="Mengubah data transaksi" title-class="font-27"
                     hide-footer no-close-on-backdrop>
                     <div class="row">
                         <div class="col-12">

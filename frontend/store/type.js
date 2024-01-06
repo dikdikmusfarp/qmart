@@ -61,4 +61,11 @@ export const actions = {
       });
   },
 
+  delete({ commit, dispatch, getters }, { id } = {}) {
+    return this.$axios.$delete("/type/" + id).then((res) => {
+      return Promise.resolve(res)
+    }).catch(function (error) {
+      return Promise.reject(error)
+    });
+  },
 };

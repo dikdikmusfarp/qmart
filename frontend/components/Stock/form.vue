@@ -5,30 +5,15 @@
                 enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-xl-6 mt-2">
-                        <label class="required">Jumlah</label> :
+                        <label class="required">Jumlah Stok</label> :
                         <div>
-                            <input id="rounded" autocomplete="off" :style="{ color: 'black' }" v-model="form.amount"
-                                type="text" class="form-control" name="amount"
-                                :class="{ 'is-invalid': $v.form.amount.$error }" placeholder="Masukkan jumlah barang" />
-                            <div v-if="$v.form.amount.$error" class="invalid-feedback">
-                                <span v-if="!$v.form.amount.required">Jumlah barang harus diisi.</span>
+                            <input id="rounded" autocomplete="off" :style="{ color: 'black' }" v-model="form.stock"
+                                type="text" class="form-control" name="stock"
+                                :class="{ 'is-invalid': $v.form.stock.$error }" placeholder="Masukkan jumlah stok" />
+                            <div v-if="$v.form.stock.$error" class="invalid-feedback">
+                                <span v-if="!$v.form.stock.required">Jumlah stok harus diisi.</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xl-6 mt-2">
-                        <label class="required">Waktu Transaksi</label> :
-                        <b-form-group id="input-group-1" label-for="input-provinsi">
-                            <multiselect v-model="form.sale_id"
-                                :options="waktu.map((type) => type.id)" placeholder="Pilih Waktu Transaksi" :custom-label="(opt) =>
-                                    waktu.find((x) => x.id == opt)
-                                        ? waktu.find((x) => x.id == opt).transaction_time
-                                        : null
-                                    ">
-                            </multiselect>
-                            <div v-if="$v.form.sale_id.$error" class="invalid-feedback">
-                                <span v-if="!$v.form.sale_id.required">Waktu transaksi harus diisi</span>
-                            </div>
-                        </b-form-group>
                     </div>
                     <div class="col-xl-6 mt-2">
                         <label class="required">Nama Barang</label> :
@@ -76,8 +61,7 @@ export default {
         return {
             form: {
                 item_id: this.items.item_id,
-                sale_id: this.items.sale_id,
-                amount: this.items.amount,
+                stock: this.items.stock,
             },
             waktu: [],
             barang: [],
@@ -85,13 +69,10 @@ export default {
     },
     validations: {
         form: {
-            amount: {
+            stock: {
                 required
             },
             item_id: {
-                required
-            },
-            sale_id: {
                 required
             },
         }
@@ -100,9 +81,8 @@ export default {
         items: {
             handler: function (val) {
                 if (val) {
-                    this.form.amount = val.amount
+                    this.form.stock = val.stock
                     this.form.item_id = val.item_id
-                    this.form.sale_id = val.sale_id
                 }
             },
             deep: true,
@@ -118,14 +98,6 @@ export default {
                 .catch((error) => {
                 });
         },
-        async getListTransaction() {
-            this.$store.dispatch("transaction/getListTransaction", { })
-                .then((resp) => {
-                    this.waktu = resp.data
-                })
-                .catch((error) => {
-                });
-        },
         submitForm() {
             this.$v.$touch()
             if (!this.$v.$invalid) {
@@ -136,15 +108,13 @@ export default {
         onReset(event) {
             event.preventDefault();
             // Reset our form values
-            this.form.name = null
-            this.form.price = null
-            this.form.type_id = null
+            this.form.stock = null
+            this.form.item_id = null
             this.$v.$reset();
         },
     },
     async created() {
         await this.getListItem();
-        await this.getListTransaction();
     },
 };
 </script>
