@@ -77,6 +77,11 @@ class SaleDetail extends Model
                             ->orWhere('sales.transaction_time', 'ilike', '%' . $attributes['search'] . '%');
                     }
                 })
+                ->where(function ($filter) use ($attributes) {
+                    if (isset($attributes['start']) && isset($attributes['end'])) {
+                        $filter->whereBetween('sales.transaction_time', [$attributes['start'],$attributes['end']]);
+                    }
+                })
                 ->orderByRaw($orderName . " " . $orderDorection . " NULLS LAST");
     }
 }

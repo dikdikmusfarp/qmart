@@ -12,6 +12,12 @@
                         <input id="rounded" autocomplete="off" @input="debounceSearch" v-model="table.search" type="search"
                             class="form-control" name="name" placeholder="Cari" />
                     </div>
+                    <div class="col-lg-4">
+                        <b-form-datepicker id="example-datepicker" v-model="table.start" class="mb-2" :style="{ color: 'black' }"></b-form-datepicker>
+                    </div>
+                    <div class="col-lg-4">
+                        <b-form-datepicker id="example-datepicker-2" :min="min" v-model="table.end" class="mb-2" :style="{ color: 'black' }" :disabled="!table.start"></b-form-datepicker>
+                    </div>
                 </div>
                 <b-table responsive="sm" class="myTablePTK" :fields="table.fields" :items="table.items"
                     :current-page="table.currentPage" :busy.sync="table.loading" :sort-by.sync="table.sortBy"
@@ -62,6 +68,9 @@ export default {
         saleForm
     },
     data() {
+        const now = new Date()
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+        const minDate = new Date(today)
         return {
             number: 0,
             table: {
@@ -116,13 +125,16 @@ export default {
                 sortDesc: false,
                 search: null,
                 loading: false,
+                start: null,
+                end: null,
             },
             form: {
                 id: null,
                 amount: null,
                 item_id: null,
                 sale_id: null,
-            }
+            },
+            min: minDate,
         };
     },
     methods: {
@@ -134,6 +146,8 @@ export default {
                 perPage: this.table.perPage,
                 order_direction: this.table.sortDesc,
                 order_column: this.table.sortBy,
+                start: this.table.start,
+                end: this.table.end,
             }
             this.$store.dispatch("detail-transaction/index", { params: param })
                 .then((resp) => {
@@ -204,6 +218,14 @@ export default {
                     this.getListSale()
                 }
             }, 600)
+        },
+    },
+    watch: {
+        'table.start': function (newVal, oldVal) {
+            this.min = this.table.start
+        },
+        'table.end': function (newVal, oldVal) {
+            this.getListSale()
         },
     },
     async created() {
