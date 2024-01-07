@@ -24,15 +24,15 @@
         </li>
       </ul>
       <div class="copyright">
-        &copy; {{ year }}, made with <i class="tim-icons icon-heart-2"></i> by
+        &copy; {{ year }}, created with <i class="tim-icons icon-heart-2"></i> by
         
         <a
-          href="https://www.creative-tim.com/?ref=pdf-vuejs"
+          href="https://www.instagram.com/dikdikmusfar"
           target="_blank"
           rel="noopener"
-        >Creative Tim</a
+        >Dikdik Musfar</a
         >
-        for a better web.
+        for a task.
       </div>
     </div>
   </footer>

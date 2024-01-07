@@ -29,7 +29,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Creative Tim',
+      default: 'Dikdik Musfar',
       description: 'Sidebar title'
     },
     shortTitle: {

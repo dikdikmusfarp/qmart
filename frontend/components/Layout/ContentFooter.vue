@@ -4,45 +4,25 @@
       <ul class="nav">
         <li class="nav-item">
           <a
-            href="http://creative-tim.com"
+            href="https://www.instagram.com/dikdikmusfar"
             target="_blank"
             rel="noopener"
             class="nav-link"
           >
-            Creative Tim
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            href="https://www.creative-tim.com/presentation"
-            target="_blank"
-            rel="noopener"
-            class="nav-link"
-          >
-            About Us
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            href="http://blog.creative-tim.com"
-            target="_blank"
-            rel="noopener"
-            class="nav-link"
-          >
-            Blog
+            Dikdik Musfar
           </a>
         </li>
       </ul>
       <div class="copyright">
-        &copy; {{ year }}, made with <i class="tim-icons icon-heart-2"></i> by
+        &copy; {{ year }}, edited with <i class="tim-icons icon-heart-2"></i> by
         
         <a
-          href="https://www.creative-tim.com/?ref=pdf-vuejs"
+          href="https://www.instagram.com/dikdikmusfar"
           target="_blank"
           rel="noopener"
-          >Creative Tim</a
+          >Dikdik Musfar</a
         >
-        for a better web.
+        for a task.
       </div>
     </div>
   </footer>
